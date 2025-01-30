@@ -3,6 +3,8 @@ from sys import exit
 
 pygame.init() 
 
+pygame.display.set_caption("penguin hunt")
+
 screen_height = 600
 screen_width = 800
 
@@ -12,15 +14,15 @@ clock = pygame.time.Clock()
 running = True #nekonecný cyklus 
 
 # player = pygame.Rect((50, 100, 50, 50))#vytvoření hráče -> hráč je obdélník x,y,šířka,výška , dvojite zavorky protoze jsme vlozili jednodušší a rychlejší list
-player_surf = pygame.image.load("penguin.webp").convert_alpha()#aplha pruhledny pozadí
+player_surf = pygame.image.load("penguin.png").convert_alpha()#aplha pruhledny pozadí
 player_surf = pygame.transform.rotozoom(player_surf, 0, 2)
-player_x = 150
-player_y = 90
+player_x = 200
+player_y = 150
 player_rect = player_surf.get_rect(midbottom=(player_x, player_y))
 player_speed = 5
 player_lives = 3
 
-enemy_surf = pygame.image.load("fox.webp").convert_alpha()
+enemy_surf = pygame.image.load("fox.png").convert_alpha()
 enemy_surf = pygame.transform.rotozoom(enemy_surf,0, 2)#koho, rotovani , velikost-scale
 enemy_x = screen_width - 20
 enemy_y = 300
