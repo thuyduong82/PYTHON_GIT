@@ -1,5 +1,8 @@
-import pygame
-import os
+import pygame, os, sys, time
+
+pygame.mixer.init()
+
+pygame.font.init()
 
 print(os.getcwd())
 
@@ -11,14 +14,15 @@ CREAM_COL = (242, 219, 163)
 BLACK = (0, 0, 0)
 PINK = (232, 0, 156)
 YELLOW = (232, 224, 10)
+WHITE = (255, 255, 255)
 
 BORDER = pygame.Rect(WIDTH//2 - 7.5 , 0, 15, HEIGHT)
 
-# HEALTH_FONT = pygame.font.SysFont('comicsans', 40)
-# WINNER_FONT = pygame.font.SysFont('comicsans', 100)
+HEALTH_FONT = pygame.font.SysFont('comicsans', 40)
+WINNER_FONT = pygame.font.SysFont('comicsans', 100)
 
 FPS = 60 #kolik framu za sekundu
-MOVEMENT = 5
+MOVEMENT = 2.5
 
 BUL_WIDTH = 10
 BUL_HEIGHT = 5
@@ -33,6 +37,7 @@ PINK_HIT = pygame.USEREVENT + 2 #nejakej event
 #nebo místo "\" použít "/"
 JELLY_PATH = (r"C:\Users\nqthu\Downloads\PYTHON (1)\game.penguin\PROJEKTY\03CANDY\jelly_left.png")
 TEDDY_PATH = ("C:/Users/nqthu/Downloads/PYTHON (1)/game.penguin/PROJEKTY/03CANDY/teddy_right.png")
+BACK_PATH = (r"C:\Users\nqthu\Downloads\PYTHON (1)\game.penguin\PROJEKTY\03CANDY\space1.webp")
 
 #u teddy jsem použila rotate u jelly ne
 JELLY_WIDTH, JELLY_HEIGHT = 80, 80
@@ -42,6 +47,7 @@ TEDDY = pygame.transform.rotate(pygame.transform.scale(TEDDY, (TEDDY_WIDTH, TEDD
 JELLY = pygame.image.load(JELLY_PATH)
 JELLY = pygame.transform.scale(JELLY, (JELLY_WIDTH, JELLY_HEIGHT))#nerotace:D
 
+BACKGROUND = pygame.transform.scale(pygame.image.load(BACK_PATH), (WIDTH, HEIGHT))
 
 def yellow_move(keys_pressed, yellow):
         if keys_pressed[pygame.K_a] and yellow.x - MOVEMENT + 10 > 0:
@@ -82,9 +88,18 @@ def handle_bullets(yellow_bullets, pink_bullets, yellow, pink):
                pink_bullets.remove(bullet) 
 #díky tomuhle je to actually vidět
 
-def grafics(pink, yellow, pink_bullets, yellow_bullets ):#aby funkce znala proměné pink yellow
-        SCREEN.fill(CREAM_COL)#barva pozadí
-        pygame.draw.rect(SCREEN, BLACK, BORDER)#kam kreslíme, barvu a co kreslíme
+def grafics(pink, yellow, pink_bullets, yellow_bullets, pink_health, yellow_health ):#aby funkce znala proměné pink yellow
+        SCREEN.blit(BACKGROUND,(0, 0))
+     #    pygame.draw.rect(SCREEN, BLACK, BORDER)#kam kreslíme, barvu a co kreslímeˇ
+
+        pink_health_text = HEALTH_FONT.render("Health: " + str(pink_health), 1, WHITE)
+        yellow_health_text = HEALTH_FONT.render("Health: " + str(yellow_health), 1, WHITE)
+
+        pink_health_text = HEALTH_FONT.render("Health: " + str(pink_health), 1, WHITE)
+        yellow_health_text = HEALTH_FONT.render("Health: " + str(yellow_health), 1, WHITE)
+        SCREEN.blit(pink_health_text, (WIDTH - pink_health_text.get_width() - 10, 10))#get_width odečíta velikost textu, -10,10 na ose y a x
+        SCREEN.blit(yellow_health_text, (10, 10))#tady už nemusíme použít get.width idk jak to vysvětlit prostě si nakres osu Thuy
+        
         SCREEN.blit(JELLY, (pink.x, pink.y))#jelly zastupuje pink rectangle->proto x==700 y==300
         SCREEN.blit(TEDDY, (yellow.x, yellow.y))
 
@@ -95,8 +110,12 @@ def grafics(pink, yellow, pink_bullets, yellow_bullets ):#aby funkce znala prom�
 
         pygame.display.update()#musime updatenout, aby se to cream col ukázala
 
-
-
+def draw_winner(text):
+    draw_text = WINNER_FONT.render(text, 1, WHITE)
+    SCREEN.blit(draw_text, (WIDTH/2 - draw_text.get_width() /
+                         2, HEIGHT/2 - draw_text.get_height()/2))
+    pygame.display.update()
+    pygame.time.delay(5000)
 
 def main():
     pink = pygame.Rect(700, 300, JELLY_WIDTH, JELLY_HEIGHT)#
@@ -104,6 +123,10 @@ def main():
 
     pink_bullets = []
     yellow_bullets = []
+
+    pink_health = 10
+    yellow_health = 10
+
 
     clock = pygame.time.Clock()
     
@@ -113,6 +136,7 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.QUIT: #pokud se stane event quit ukonči hru
                 running = False
+                pygame.quit()
 
             if event.type == pygame.KEYDOWN:
                  if event.key == pygame.K_LCTRL and len(yellow_bullets) < MAX_BULLET:#leftcontol
@@ -124,16 +148,31 @@ def main():
                       bullet = pygame.Rect(
                            pink.x, pink.y + JELLY_HEIGHT//2 , BUL_WIDTH, BUL_HEIGHT)
                       pink_bullets.append(bullet)
-          
+
+            if event.type == PINK_HIT:
+                 pink_health -= 1
+            if event.type == YELLOW_HIT:
+                 yellow_health -= 1
+
+            winner_text = "" #prázdný win
+            if pink_health <= 0:
+                 winner_text = "TEDDY WINS!"
+            if yellow_health <= 0:
+                 winner_text = "JELLY WINS!"
+            if winner_text != "":#pokud není prázdný
+                 draw_winner(winner_text)
+                 break #někdo vyhrál
+             
+
         keys_pressed = pygame.key.get_pressed()
         yellow_move(keys_pressed, yellow)
         pink_move(keys_pressed, pink)
         
         handle_bullets(yellow_bullets, pink_bullets, yellow, pink)
     
-        grafics(pink, yellow, pink_bullets, yellow_bullets)
+        grafics(pink, yellow, pink_bullets, yellow_bullets, pink_health, yellow_health)
     
-    pygame.quit()
+    main()
 
 #spoštíme hlavní funkci
 if __name__ == "__main__":
