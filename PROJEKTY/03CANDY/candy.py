@@ -1,7 +1,5 @@
 import pygame, os, sys, time
-
 pygame.mixer.init()
-
 pygame.font.init()
 
 print(os.getcwd())
@@ -18,16 +16,19 @@ WHITE = (255, 255, 255)
 
 BORDER = pygame.Rect(WIDTH//2 - 7.5 , 0, 15, HEIGHT)
 
-HEALTH_FONT = pygame.font.SysFont('comicsans', 40)
-WINNER_FONT = pygame.font.SysFont('comicsans', 100)
+HIT_SOUND = pygame.mixer.Sound(r'C:\Users\nqthu\Downloads\PYTHON (1)\game.penguin\PROJEKTY\03CANDY\hit.wav')
+SHOOT_SOUND = pygame.mixer.Sound(r'C:\Users\nqthu\Downloads\PYTHON (1)\game.penguin\PROJEKTY\03CANDY\shoot.mp3')
+
+HEALTH_FONT = pygame.font.SysFont('harlowsolid', 40)
+WINNER_FONT = pygame.font.SysFont('algerian', 115)
 
 FPS = 60 #kolik framu za sekundu
-MOVEMENT = 2.5
+MOVEMENT = 3
 
 BUL_WIDTH = 10
 BUL_HEIGHT = 5
 BULLET_MOVEMENT = 7
-MAX_BULLET = 3
+MAX_BULLET = 4
 
 YELLOW_HIT = pygame.USEREVENT + 1 #1==unique id eventu,yellow a pink nemuzou mit stejne cislo
 PINK_HIT = pygame.USEREVENT + 2 #nejakej event
@@ -115,7 +116,23 @@ def draw_winner(text):
     SCREEN.blit(draw_text, (WIDTH/2 - draw_text.get_width() /
                          2, HEIGHT/2 - draw_text.get_height()/2))
     pygame.display.update()
-    pygame.time.delay(5000)
+
+    waiting = True
+    while waiting:
+         for event in pygame.event.get():
+              if event.type == pygame.QUIT: #když zavřeme okno
+                   pygame.quit()
+                   sys.exit()
+              if event.type == pygame.KEYDOWN:
+                   if event.key == pygame.K_SPACE: #Restart
+                        waiting = False
+                   if event.key == pygame.K_ESCAPE: #quit escapem
+                        pygame.quit()     
+                        sys.exit()          
+                   
+
+                   
+ 
 
 def main():
     pink = pygame.Rect(700, 300, JELLY_WIDTH, JELLY_HEIGHT)#
@@ -126,7 +143,6 @@ def main():
 
     pink_health = 10
     yellow_health = 10
-
 
     clock = pygame.time.Clock()
     
@@ -142,17 +158,21 @@ def main():
                  if event.key == pygame.K_LCTRL and len(yellow_bullets) < MAX_BULLET:#leftcontol
                       bullet = pygame.Rect(
                            yellow.x + TEDDY_WIDTH - 6, yellow.y + TEDDY_HEIGHT//2 - 2.5, BUL_WIDTH,BUL_HEIGHT)#/2 vystřelí zprostředka výšky teddy,-2.5->pol výškybullet,
-                      yellow_bullets.append(bullet)    
+                      yellow_bullets.append(bullet)
+                      SHOOT_SOUND.play() 
 
                  if event.key == pygame.K_RCTRL and len(pink_bullets) < MAX_BULLET:#nestrilej dalsi bullets pokud na screen už je maximalni pocet bullets
                       bullet = pygame.Rect(
                            pink.x, pink.y + JELLY_HEIGHT//2 , BUL_WIDTH, BUL_HEIGHT)
                       pink_bullets.append(bullet)
+                      SHOOT_SOUND.play()
 
             if event.type == PINK_HIT:
                  pink_health -= 1
+                 HIT_SOUND.play()
             if event.type == YELLOW_HIT:
                  yellow_health -= 1
+                 HIT_SOUND.play()
 
             winner_text = "" #prázdný win
             if pink_health <= 0:
@@ -161,7 +181,8 @@ def main():
                  winner_text = "JELLY WINS!"
             if winner_text != "":#pokud není prázdný
                  draw_winner(winner_text)
-                 break #někdo vyhrál
+                 main() #někdo vyhrál
+                 return
              
 
         keys_pressed = pygame.key.get_pressed()
