@@ -17,7 +17,7 @@ player_path = ("penguin.png")
 enemy_path = ("fox.png")
 
 # player = pygame.Rect((50, 100, 50, 50))#vytvoření hráče -> hráč je obdélník x,y,šířka,výška , dvojite zavorky protoze jsme vlozili jednodušší a rychlejší list
-player_surf = pygame.image.load(player_path).convert_alpha()#aplha pruhledny pozadí
+player_surf = pygame.image.load("penguin.png").convert_alpha()#aplha pruhledny pozadí
 player_surf = pygame.transform.rotozoom(player_surf, 0, 2)
 player_x = 200
 player_y = 150
@@ -28,6 +28,7 @@ player_lives = 3
 
 enemy_run1 = pygame.image.load("fox.png").convert_alpha()
 enemy_run2 = pygame.image.load("fox.png").convert_alpha()
+
 enemy_index = 0
 enemy_surf = enemy_run_all[enemy_index]
 enemy_run_all = [enemy_run1, enemy_run2]
@@ -54,7 +55,7 @@ def penguin_move(key ,player_rect):
     if key[pygame.K_d]:
         player_rect.right += player_speed
 
-
+ee
 
 while running:
 
