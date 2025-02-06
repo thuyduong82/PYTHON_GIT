@@ -4,7 +4,6 @@ pygame.font.init()
 
 pygame.display.set_caption("první hra")
 
-
 WIDTH, HEIGHT = 900, 500 #velikost obrazovky
 SCREEN = pygame.display.set_mode((WIDTH, HEIGHT))
 CREAM_COL = (242, 219, 163)
@@ -15,8 +14,8 @@ WHITE = (255, 255, 255)
 
 BORDER = pygame.Rect(WIDTH//2 - 7.5 , 0, 15, HEIGHT)
 
-HIT_SOUND = pygame.mixer.Sound(r'C:\Users\nqthu\OneDrive\Desktop\PYTHON (1)\game.penguin\PROJEKTY\03CANDY\shoot.mp3')
-SHOOT_SOUND = pygame.mixer.Sound(r'C:\Users\nqthu\OneDrive\Desktop\PYTHON (1)\game.penguin\PROJEKTY\03CANDY\bubble.wav')
+HIT_SOUND = pygame.mixer.Sound('bubble.wav')
+SHOOT_SOUND = pygame.mixer.Sound('shoot.mp3')
 
 HEALTH_FONT = pygame.font.SysFont('harlowsolid', 40)
 WINNER_FONT = pygame.font.SysFont('algerian', 115)
@@ -35,9 +34,11 @@ PINK_HIT = pygame.USEREVENT + 2 #nejakej event
 #r ->rawstring dělá, aby to bral "\" jako obyč znak(v pythonu je "\" escape backlash ) 
 #nebo můžeme "\" zdvojit viz. \\
 #nebo místo "\" použít "/"
-JELLY_PATH = (r"C:\Users\nqthu\OneDrive\Desktop\PYTHON (1)\game.penguin\PROJEKTY\03CANDY\jelly_left.png")
-TEDDY_PATH = (r"C:\Users\nqthu\OneDrive\Desktop\PYTHON (1)\game.penguin\PROJEKTY\03CANDY\teddy_right.png")
-BACK_PATH = (r"C:\Users\nqthu\OneDrive\Desktop\PYTHON (1)\game.penguin\PROJEKTY\03CANDY\space1.webp")
+
+JELLY_PATH = ("jelly_left.png")
+TEDDY_PATH = ("teddy_right.png")
+BACK_PATH = ("space1.webp")
+
 
 #u teddy jsem použila rotate u jelly ne
 JELLY_WIDTH, JELLY_HEIGHT = 80, 80
