@@ -3,7 +3,7 @@ import datetime as dt
 import json
 import tkinter as tk
 
-def load_game():#stahnout data#
+def load_game():#stahnout data
     global lemur
     global path
     load_data = {}#stahnou data do prazdneho dictionary#
