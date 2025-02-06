@@ -2,9 +2,8 @@ import pygame, os, sys, time
 pygame.mixer.init()
 pygame.font.init()
 
-print(os.getcwd())
-
 pygame.display.set_caption("první hra")
+
 
 WIDTH, HEIGHT = 900, 500 #velikost obrazovky
 SCREEN = pygame.display.set_mode((WIDTH, HEIGHT))
@@ -16,8 +15,8 @@ WHITE = (255, 255, 255)
 
 BORDER = pygame.Rect(WIDTH//2 - 7.5 , 0, 15, HEIGHT)
 
-HIT_SOUND = pygame.mixer.Sound(r'C:\Users\nqthu\Downloads\PYTHON (1)\game.penguin\PROJEKTY\03CANDY\hit.wav')
-SHOOT_SOUND = pygame.mixer.Sound(r'C:\Users\nqthu\Downloads\PYTHON (1)\game.penguin\PROJEKTY\03CANDY\shoot.mp3')
+HIT_SOUND = pygame.mixer.Sound(r'C:\Users\nqthu\OneDrive\Desktop\PYTHON (1)\game.penguin\PROJEKTY\03CANDY\shoot.mp3')
+SHOOT_SOUND = pygame.mixer.Sound(r'C:\Users\nqthu\OneDrive\Desktop\PYTHON (1)\game.penguin\PROJEKTY\03CANDY\bubble.wav')
 
 HEALTH_FONT = pygame.font.SysFont('harlowsolid', 40)
 WINNER_FONT = pygame.font.SysFont('algerian', 115)
@@ -36,9 +35,9 @@ PINK_HIT = pygame.USEREVENT + 2 #nejakej event
 #r ->rawstring dělá, aby to bral "\" jako obyč znak(v pythonu je "\" escape backlash ) 
 #nebo můžeme "\" zdvojit viz. \\
 #nebo místo "\" použít "/"
-JELLY_PATH = (r"C:\Users\nqthu\Downloads\PYTHON (1)\game.penguin\PROJEKTY\03CANDY\jelly_left.png")
-TEDDY_PATH = ("C:/Users/nqthu/Downloads/PYTHON (1)/game.penguin/PROJEKTY/03CANDY/teddy_right.png")
-BACK_PATH = (r"C:\Users\nqthu\Downloads\PYTHON (1)\game.penguin\PROJEKTY\03CANDY\space1.webp")
+JELLY_PATH = (r"C:\Users\nqthu\OneDrive\Desktop\PYTHON (1)\game.penguin\PROJEKTY\03CANDY\jelly_left.png")
+TEDDY_PATH = (r"C:\Users\nqthu\OneDrive\Desktop\PYTHON (1)\game.penguin\PROJEKTY\03CANDY\teddy_right.png")
+BACK_PATH = (r"C:\Users\nqthu\OneDrive\Desktop\PYTHON (1)\game.penguin\PROJEKTY\03CANDY\space1.webp")
 
 #u teddy jsem použila rotate u jelly ne
 JELLY_WIDTH, JELLY_HEIGHT = 80, 80
@@ -50,6 +49,10 @@ JELLY = pygame.transform.scale(JELLY, (JELLY_WIDTH, JELLY_HEIGHT))#nerotace:D
 
 BACKGROUND = pygame.transform.scale(pygame.image.load(BACK_PATH), (WIDTH, HEIGHT))
 
+
+
+
+
 def yellow_move(keys_pressed, yellow):
         if keys_pressed[pygame.K_a] and yellow.x - MOVEMENT + 10 > 0:
              yellow.x -= MOVEMENT
@@ -59,7 +62,7 @@ def yellow_move(keys_pressed, yellow):
              yellow.y -= MOVEMENT
         if keys_pressed[pygame.K_s] and yellow.y + MOVEMENT + TEDDY_HEIGHT - 5 < HEIGHT:
              yellow.y += MOVEMENT
-
+9
 def pink_move(keys_pressed, pink):
         if keys_pressed[pygame.K_LEFT] and pink.x - MOVEMENT - 5 > BORDER.x :#left
              pink.x -= MOVEMENT
@@ -78,7 +81,6 @@ def handle_bullets(yellow_bullets, pink_bullets, yellow, pink):
                yellow_bullets.remove(bullet)
           elif bullet.x > WIDTH:
                yellow_bullets.remove(bullet)
-
 
      for bullet in pink_bullets:
           bullet.x -= BULLET_MOVEMENT
@@ -131,8 +133,8 @@ def draw_winner(text):
                         sys.exit()          
                    
 
-                   
- 
+
+
 
 def main():
     pink = pygame.Rect(700, 300, JELLY_WIDTH, JELLY_HEIGHT)#
@@ -194,6 +196,8 @@ def main():
         grafics(pink, yellow, pink_bullets, yellow_bullets, pink_health, yellow_health)
     
     main()
+
+
 
 #spoštíme hlavní funkci
 if __name__ == "__main__":
