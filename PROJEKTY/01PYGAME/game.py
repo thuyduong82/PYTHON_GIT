@@ -55,7 +55,6 @@ def penguin_move(key ,player_rect):
     if key[pygame.K_d]:
         player_rect.right += player_speed
 
-ee
 
 while running:
 
