@@ -65,7 +65,6 @@ def penguin_move(key ,player_rect):
 
 
 
-
 while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT: #kontroluje vypínání hry
