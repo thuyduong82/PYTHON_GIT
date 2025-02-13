@@ -2,8 +2,16 @@ import pygame
 from sys import exit
 
 pygame.init() 
-
 pygame.display.set_caption("penguin hunt")
+
+def enemy_animation():
+    global enemy_surf, enemy_index
+    enemy_index += 0.1
+
+    if enemy_index > len(enemy_run_all):
+        enemy_index = 0
+    enemy_surf = enemy_run_all[int(enemy_index)] 
+
 
 screen_height = 600
 screen_width = 800
@@ -27,7 +35,8 @@ player_lives = 3
 
 
 enemy_run1 = pygame.image.load("fox.png").convert_alpha()
-enemy_run2 = pygame.image.load("fox.png").convert_alpha()
+enemy_run2 = pygame.image.load("fox2.png").convert_alpha()
+enemy_run_all = [enemy_run1, enemy_run2]
 enemy_index = 0
 enemy_surf = enemy_run_all[enemy_index]
 enemy_run_all = [enemy_run1, enemy_run2]
@@ -42,7 +51,7 @@ elapsed_time = 0
 
 font = pygame.font.SysFont('algerian', 25)
 
-invulnerability = 0
+invulnerability = False
 
 def penguin_move(key ,player_rect):
     if key[pygame.K_w]:
@@ -56,8 +65,8 @@ def penguin_move(key ,player_rect):
 
 
 
-while running:
 
+while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT: #kontroluje vypínání hry
             running = False
@@ -87,22 +96,27 @@ while running:
     # pygame.draw.rect(screen, ("pink"), player )#povrch, barva, value jakyý rectangle chceme vykreslit
 
     screen.blit(player_surf, ((player_rect)))#dát na screen player_surf(tucnáka)a souřadnice, kde se spawne
-    screen.blit(enemy_surf, ((enemy_x, enemy_y)))#blit jako vyblit neco na screen
-    enemy_x -= enemy_speed
+    enemy_animation()
+    screen.blit(enemy_surf, ((enemy_rect)))#blit jako vyblit neco na screen
+    enemy_rect.left -= enemy_speed
 
     elapsed_time += clock.get_time()
     if elapsed_time > 2000:
-        invulnerability == False
+        invulnerability = False
 
 
     if player_rect.colliderect(enemy_rect):
+        print(invulnerability)
         if not invulnerability:
+            print("cau")
             player_lives -= 1
             invulnerability = True
             elapsed_time = 0
         
     if player_lives == 0:
         exit()
+
+    print(player_lives)
 
     pygame.display.update()
     #pygame.display.flip() alernstivní funkce .update
