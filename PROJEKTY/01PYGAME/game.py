@@ -79,12 +79,16 @@ invulnerability = False
 
 def penguin_move(key ,player_rect):
     if key[pygame.K_w]:
+        animation(1)
         player_rect.top -= player_speed
     if key[pygame.K_a]:
+        animation(2)
         player_rect.left -= player_speed
     if key[pygame.K_s]:
+        animation(0)
         player_rect.bottom += player_speed
     if key[pygame.K_d]:
+        animation(3)
         player_rect.right += player_speed
 
 
