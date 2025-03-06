@@ -12,6 +12,27 @@ def enemy_animation():
         enemy_index = 0
     enemy_surf = enemy_run_all[int(enemy_index)] 
 
+def animation(direction):
+    global player_index
+    frame_count = 3
+
+    player_index += 0.1
+    if player_index >= frame_count:
+        player_index = 0
+    
+    player_img = image_cutter(player_spritesheet, int(player_index), direction, 15, 16, 3)
+
+
+
+def image_cutter(sheet, frame_x, frame_y, width, height, scale):#(player_spritesheet, 0, 0, 15, 16, 1)
+    img = pygame.Surface((width, height)).convert_alpha()#nejaka plocha s x a y
+    img.blit(sheet, (0, 0), ((frame_x * width), (frame_y * height), width, height))
+    img = pygame.transform.scale(img, (width*scale, height*scale))
+    img.set_colorkey((0, 0, 0))#vsechno co je cerny zpruhledni
+    return img
+
+
+
 
 screen_height = 600
 screen_width = 800
@@ -25,11 +46,14 @@ player_path = ("penguin.png")
 enemy_path = ("fox.png")
 
 # player = pygame.Rect((50, 100, 50, 50))#vytvoření hráče -> hráč je obdélník x,y,šířka,výška , dvojite zavorky protoze jsme vlozili jednodušší a rychlejší list
-player_surf = pygame.image.load(player_path).convert_alpha()#aplha pruhledny pozadí
-player_surf = pygame.transform.rotozoom(player_surf, 0, 2)
+#player_surf = pygame.image.load(player_path).convert_alpha()#aplha pruhledny pozadí
+#player_surf = pygame.transform.rotozoom(player_surf, 0, 2)
 player_x = 200
 player_y = 150
-player_rect = player_surf.get_rect(midbottom=(player_x, player_y))
+player_spritesheet = pygame.image.load("woman_blonde_run.png").convert_alpha()
+player_img = image_cutter(player_spritesheet, 0, 0, 15, 16, 1)#na jake hodnote x,y;width = 15, height = 16, kolik zoom
+player_rect = player_img.get_rect(midbottom=(player_x, player_y))
+player_index = 0
 player_speed = 5
 player_lives = 3
 
@@ -94,7 +118,7 @@ while running:
 
     # pygame.draw.rect(screen, ("pink"), player )#povrch, barva, value jakyý rectangle chceme vykreslit
 
-    screen.blit(player_surf, ((player_rect)))#dát na screen player_surf(tucnáka)a souřadnice, kde se spawne
+    screen.blit(player_img, ((player_rect)))#dát na screen player_surf(tucnáka)a souřadnice, kde se spawne
     enemy_animation()
     screen.blit(enemy_surf, ((enemy_rect)))#blit jako vyblit neco na screen
     enemy_rect.left -= enemy_speed
@@ -107,7 +131,6 @@ while running:
     if player_rect.colliderect(enemy_rect):
         print(invulnerability)
         if not invulnerability:
-            print("cau")
             player_lives -= 1
             invulnerability = True
             elapsed_time = 0
