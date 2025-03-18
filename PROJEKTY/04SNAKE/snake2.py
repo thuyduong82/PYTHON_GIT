@@ -2,9 +2,12 @@ import pygame
 
 # pygame setup
 pygame.init()
-screen = pygame.display.set_mode((1280, 720))
+SCREEN_WIDTH, SCREEN_HEIGHT = 600, 400
+screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 clock = pygame.time.Clock()
 running = True
+
+
 
 def graphics():
     screen.fill("purple")
