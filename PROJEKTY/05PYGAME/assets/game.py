@@ -47,6 +47,8 @@ running = True
 # Vytvoření fontu k vykreslení životů - pokud nechcete vlastní font, použijte None (bez uvozovek) místo názvu fontu
 font = pygame.font.Font("assets/fonts/PixelifySans-Regular.ttf", 25)
 
+player = pygame.sprite.GroupSingle()
+player.add(Player())
 
 # vytvoření monstra
 monster_run1 = pygame.image.load("assets/characters/monsters/monstrum.png").convert_alpha()
@@ -85,6 +87,9 @@ while running:
     # text_lives = font.render(f"Lives: {player_lives}", False, "#000000") 
     # vykreslení textu na obrazovku
     # screen.blit(text_lives, (screen_width-100, 10))
+
+    player.draw(screen)
+    player.update()
 
     # na obrazovku vykresli - surface na rectangle (recntagle má souřadnice, viz výše)
     # screen.blit(player_img, player_rect)
