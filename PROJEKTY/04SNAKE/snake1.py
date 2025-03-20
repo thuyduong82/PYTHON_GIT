@@ -47,14 +47,14 @@ while running:
     y += dy
     
     # Wrap around the screen
-    x %= WIDTH
-    y %= HEIGHT
+    x %= SCREEN_WIDTH
+    y %= SCREEN_HEIGHT
     
     # Check collision with food
     if abs(x - food_x) < SQUARE_SIZE and abs(y - food_y) < SQUARE_SIZE:
         score += 1
-        food_x = random.randint(0, (WIDTH - SQUARE_SIZE) // SQUARE_SIZE) * SQUARE_SIZE
-        food_y = random.randint(0, (HEIGHT - SQUARE_SIZE) // SQUARE_SIZE) * SQUARE_SIZE
+        food_x = random.randint(0, (SCREEN_WIDTH - SQUARE_SIZE) // SQUARE_SIZE) * SQUARE_SIZE
+        food_y = random.randint(0, (SCREEN_HEIGHT - SQUARE_SIZE) // SQUARE_SIZE) * SQUARE_SIZE
     
     # Draw square
     pygame.draw.rect(screen, GREEN, (x, y, SQUARE_SIZE, SQUARE_SIZE))

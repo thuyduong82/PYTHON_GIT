@@ -1,1 +1,0 @@
-monster_rect.left

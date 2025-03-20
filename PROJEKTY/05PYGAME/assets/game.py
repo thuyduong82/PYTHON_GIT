@@ -4,6 +4,7 @@ import pygame
 from sys import exit
 from settings import *
 from utility import image_cutter
+from player import Player
 
 # inicializuje hru - spustíme pygame
 pygame.init()
@@ -75,33 +76,18 @@ while running:
             exit()
     
     # proměnná key, pod ní schováme stisknutou klávesu
-    key = pygame.key.get_pressed()
-
-    # pokud je stisknutá klávesa w, pohni hráčem o (x, y)
-    if key[pygame.K_w]:
-        animation(1)
-        player_rect.top -= player_speed
-    if key[pygame.K_a]:
-        animation(2)
-        player_rect.left -= player_speed
-    if key[pygame.K_s]:
-        animation(0)
-        player_rect.bottom += player_speed
-    if key[pygame.K_d]:
-        animation(3)
-        player_rect.right += player_speed
-
+  
   
     # obarví obrazovku na bílo
     screen.fill("white")
 
     # render fontu
-    text_lives = font.render(f"Lives: {player_lives}", False, "#000000") 
+    # text_lives = font.render(f"Lives: {player_lives}", False, "#000000") 
     # vykreslení textu na obrazovku
-    screen.blit(text_lives, (screen_width-100, 10))
+    # screen.blit(text_lives, (screen_width-100, 10))
 
     # na obrazovku vykresli - surface na rectangle (recntagle má souřadnice, viz výše)
-    screen.blit(player_img, player_rect)
+    # screen.blit(player_img, player_rect)
 
     # monstrum se pohybuje zprava doleva
     monster_rect.left -= monster_speed
@@ -115,12 +101,12 @@ while running:
     
 
     # pokud nastane kolize mezi hráčem a monstrem
-    if player_rect.colliderect(monster_rect):
-        # pokud hráč není nesmrtelný - alternativa zápisu if invulnerability == False
-        if not invulnerability:
-            player_lives -= 1 # odeber život
-            invulnerability = True # zapni nesmrtelnost
-            elapsed_time = 0 # vynuluj časomíru
+    # if player_rect.colliderect(monster_rect):
+    #     # pokud hráč není nesmrtelný - alternativa zápisu if invulnerability == False
+    #     if not invulnerability:
+    #         player_lives -= 1 # odeber život
+    #         invulnerability = True # zapni nesmrtelnost
+    #         elapsed_time = 0 # vynuluj časomíru
 
     # pokud uběhly 2 sekundy
     if elapsed_time > 2000:

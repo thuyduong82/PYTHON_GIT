@@ -21,3 +21,23 @@ class Player(pygame.sprite.Sprite): #nazvy class= velke pismeno (napr Player)
             self.index = 0
         
         self.img = image_cutter(self.spritesheet, int(self.index), direction, 15, 16, 3)
+
+    
+    
+    def update(self):
+        key = pygame.key.get_pressed()
+
+        # pokud je stisknutá klávesa w, pohni hráčem o (x, y)
+        if key[pygame.K_w]:
+            self.animation(1)
+            self.rect.top -= self.speed
+        if key[pygame.K_a]:
+            self.animation(2)
+            self.rect.left -= self.speed
+        if key[pygame.K_s]:
+            self.animation(0)
+            self.rect.bottom += self.speed
+        if key[pygame.K_d]:
+            self.animation(3)
+            self.rect.right += self.speed
+
