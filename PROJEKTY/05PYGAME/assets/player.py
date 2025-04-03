@@ -13,6 +13,7 @@ class Player(pygame.sprite.Sprite): #nazvy class= velke pismeno (napr Player)
         self.speed = 10
         self.lives = 3
         self.invulnerability = False
+        self.monster_group = monster_group
     
     def animation(self, direction):
         frame_count = 3
@@ -23,9 +24,7 @@ class Player(pygame.sprite.Sprite): #nazvy class= velke pismeno (napr Player)
         
         self.image = image_cutter(self.spritesheet, int(self.index), direction, 15, 16, 3)
 
-    
-    
-    def update(self):
+    def update(self, monster_group):
         key = pygame.key.get_pressed()
 
         # pokud je stisknutá klávesa w, pohni hráčem o (x, y)
@@ -41,4 +40,6 @@ class Player(pygame.sprite.Sprite): #nazvy class= velke pismeno (napr Player)
         if key[pygame.K_d]:
             self.animation(3)
             self.rect.right += self.speed
+        
+        if pygame.sprite.spritecollide(self, monster_group, False)#kdo koliduje, s kým
 

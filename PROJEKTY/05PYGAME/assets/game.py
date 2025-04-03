@@ -22,12 +22,13 @@ running = True
 # Vytvoření fontu k vykreslení životů - pokud nechcete vlastní font, použijte None (bez uvozovek) místo názvu fontu
 font = pygame.font.Font("assets/fonts/PixelifySans-Regular.ttf", 25)
 
-player = pygame.sprite.GroupSingle()
-player.add(Player())
 
 # vytvoření monstra
 monsters = pygame.sprite.Group()
-monsters.add(Monster())
+monsters.add(Monster(1, 200, 500),Monster (2, 300, 200),Monster (3, 400, 300),Monster (4, 500, 400))
+#type, x , y
+player = pygame.sprite.GroupSingle()
+player.add(Player())
 
 # Počáteční hodnota časomíry
 elapsed_time = 0
@@ -53,10 +54,11 @@ while running:
     # screen.blit(text_lives, (screen_width-100, 10))
 
     player.draw(screen)
-    player.update()
+    player.update(monsters)
 
     monsters.draw(screen)
     monsters.update()
+
 
     # na obrazovku vykresli - surface na rectangle (recntagle má souřadnice, viz výše)
     # screen.blit(player_img, player_rect)
