@@ -24,6 +24,9 @@ monsters.add(Monster(1, 200, 500),Monster (2, 300, 200),Monster (3, 400, 300),Mo
 player = pygame.sprite.GroupSingle()
 player.add(Player())
 
+background = pygame.image.load("background.png")
+screen.blit
+
 # # Počáteční hodnota časomíry
 elapsed_time = 0
 
@@ -38,7 +41,7 @@ while running:
   
   
     # obarví obrazovku na bílo
-    screen.fill("white")
+    screen.blit(background, (0,0))
 
 
     player.draw(screen)
