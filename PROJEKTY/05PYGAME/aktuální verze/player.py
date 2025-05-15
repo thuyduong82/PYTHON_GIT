@@ -12,6 +12,7 @@ class Player(pygame.sprite.Sprite):
         self.index = 0
         self.speed = 10
         self.lives = 3
+        self.points = 0
         self.invulnerability = False
         self.frame_count = 3
         self.elapsed_time = 0
@@ -25,7 +26,7 @@ class Player(pygame.sprite.Sprite):
         self.image = image_cutter(self.spritesheet, int(self.index), row, 15, 16, 3)
 
 
-    def update(self, monster_group, clock):
+    def update(self, monster_group, furniture_group, clock):
         key = pygame.key.get_pressed()
 
         if key[pygame.K_w]:
@@ -52,6 +53,12 @@ class Player(pygame.sprite.Sprite):
                 self.lives -= 1 # odeber život
                 self.invulnerability = True # zapni nesmrtelnost
                 self.elapsed_time = 0 # vynuluj časomíru
+
+        if pygame.sprite.spritecollide(self, furniture_group, True):
+            if not self.invulnerability:
+                self.points += 1 
+                self.invulnerability = True # zapni nesmrtelnost
+                self.elapsed_time = 0 # vynuluj časomíru
     
     def draw(self, screen):
-        screen.blit(self.img, self.rect)
+        screen.blit(self.image, self.rect)

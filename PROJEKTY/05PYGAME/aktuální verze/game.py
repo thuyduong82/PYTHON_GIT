@@ -6,13 +6,28 @@ from settings import *
 from utility import image_cutter
 from player import Player
 from monster import Monster
+import json
+from game_objects import GameObjects
+from player import Player
 
 # inicializuje hru - spustíme pygame
 pygame.init()
 
+furniture_group = pygame.sprite.Group()
 
+def create_furniture():
+    path_to_json = "assets/world/data.json"
+    furniture_img = image_cutter(pygame.image.load("assets/sproutlands/Objects/Basic_Furniture.png"), 4, 2, 16, 16, 1)#x,y,width,height,scale
+    with open(path_to_json, mode = "r") as file:
+        data = json.load(file)
 
-
+    for entity in data["entities"]["Furniture"]:
+        x = entity["x"]
+        y = entity["y"]
+        w = entity["w"]
+        h = entity["h"]
+        furniture = GameObjects(x, y, w, h)
+        furniture_group.add(furniture)
     
 
 # vytvoříme obraz
@@ -59,9 +74,11 @@ while running:
     screen.blit(text_lives, (screen_width-100, 10))
 
     # na obrazovku vykresli - surface na rectangle (recntagle má souřadnice, viz výše)
-    
+    create_furniture()
+    furniture_group.draw(screen)
+
     player.draw(screen)
-    player.update(monsters, clock)
+    player.update(monsters,furniture_group, clock)
     
     monsters.draw(screen)
     monsters.update()

@@ -20,8 +20,8 @@
 				"layer": "Furniture",
 				"x": 160,
 				"y": 160,
-				"width": 16,
-				"height": 16,
+				"w": 16,
+				"h": 16,
 				"color": 12470831,
 				"customFields" : {}
 			},
@@ -31,8 +31,8 @@
 				"layer": "Furniture",
 				"x": 544,
 				"y": 160,
-				"width": 16,
-				"height": 16,
+				"w": 16,
+				"h": 16,
 				"color": 12470831,
 				"customFields" : {}
 			},
@@ -42,8 +42,8 @@
 				"layer": "Furniture",
 				"x": 160,
 				"y": 400,
-				"width": 16,
-				"height": 16,
+				"w": 16,
+				"h": 16,
 				"color": 12470831,
 				"customFields" : {}
 			},
@@ -53,8 +53,8 @@
 				"layer": "Furniture",
 				"x": 544,
 				"y": 416,
-				"width": 16,
-				"height": 16,
+				"w": 16,
+				"h": 16,
 				"color": 12470831,
 				"customFields" : {}
 			}
