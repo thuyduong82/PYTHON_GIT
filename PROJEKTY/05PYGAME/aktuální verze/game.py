@@ -73,6 +73,10 @@ while running:
     # vykreslení textu na obrazovku
     screen.blit(text_lives, (screen_width-100, 10))
 
+    text_points = font.render(f"points: {player.sprite.lives}", False, "#000000") 
+    # vykreslení textu na obrazovku
+    screen.blit(text_points, (screen_width-200, 10))
+
     # na obrazovku vykresli - surface na rectangle (recntagle má souřadnice, viz výše)
     create_furniture()
     furniture_group.draw(screen)
