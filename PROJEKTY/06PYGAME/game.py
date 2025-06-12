@@ -77,7 +77,7 @@ while running:
     # na obrazovku vykresli - surface na rectangle (recntagle má souřadnice, viz výše)
     
     player.draw(screen)
-    player.update(monsters, clock)
+    player.update(monsters,egg_group, clock)
     
     monsters.draw(screen)
     monsters.update()

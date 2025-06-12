@@ -26,5 +26,5 @@ class Furniture(GameObject):
 class Egg(GameObject):
         def __init__(self, x, y, w, h):
             super().__init__(x, y, w, h)
-            self.image = image_cutter(pygame.image.load("doplnit správnou cestu a parametry"), 4, 2, 16, 16, 3)
+            self.image = pygame.image.load(r"assets\sproutlands\Objects\Egg_item.png").convert_alpha()
             self.rect = self.image.get_rect(topleft=(self.x, self.y))
