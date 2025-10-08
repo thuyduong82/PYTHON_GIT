@@ -12,9 +12,7 @@ cursor = connection.cursor
 
 user_input = input("přidej postavičku do databáze:")
 
-cursor.execute(f"""
-        INSERT INTO characters (name) VALUES ({user_input})
-               """)
+cursor.execute("INSERT INTO characters (name) VALUES (?)",((user_input,))
 
 #potvrzeni vlozeni dat do db
 connection.commit()
