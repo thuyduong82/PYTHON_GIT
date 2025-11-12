@@ -1,5 +1,6 @@
 from bs4 import BeautifulSoup
-import request
+import requestyes
+
 
 def main():
     url = "https:/www.trebesin.cz"
