@@ -10,17 +10,19 @@ def main():
     nearsenal = soup.find_all("span", class_="scores__score")[0]
 
     for score in nearsenal:
-        print(score.text)
+        score = int(score)
+        print(score)
 
     arsenal = soup.find_all("span", class_="scores__score scores__score--arsenal")
 
     for ascore in arsenal:
-        print(ascore.text)
+        ascore = int(ascore.text)
+        print(ascore)
 
     team = soup.find_all("div", class_="team-crest__name-value")
     for name in team:
-        print(name.text)
-
+        name = name.text
+        print(name)
 
     if ascore > score:
         print("YEEEEE, velmi dobra nalada")
@@ -30,9 +32,6 @@ def main():
         print(":/")
     if name == "Sunderland":
         print("nalada x10")
-
-
-
 
 if __name__ == "__main__":
     main()
