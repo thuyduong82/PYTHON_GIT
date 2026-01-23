@@ -3,9 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Úvodní stránka</title>
+    <link rel="stylesheet" href="static/style.css">
 </head>
 <body>
-    Person name{{jinja_name}} from class{{jinja_class}} sends you to following message{{jinja_message}}
+    <h1>Everything works!</h1>
+    <a href="{{ url_for('form') }}">Form</a>
 </body>
 </html>
