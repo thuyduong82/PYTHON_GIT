@@ -25,7 +25,7 @@ def login():
     password = request.args.get("password")
 
     for i from tophesla:
-        if i == tphesla
+        if i == tophesla
 
     if len(password) > 10:
         return redirect("/success")

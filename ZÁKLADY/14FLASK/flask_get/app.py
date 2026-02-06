@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, url_for, request
+from flask import Flask, render_template, redirect, url_for, request #coto znamena-test
 import random
 
 # Vytvoření flaskové aplikace

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"><!--prizpusobeni screenu dle zarizeni-->
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css"><!--tri zpusoby jak udelat css:pres link, v  head, v hmtl-->
+    <style>
+        #mini-nadpis{
+            color: black;
+            background-color:palegoldenrod ;
+            font-family: monospace; /*patkovy,bezpatkovy,monospace*/
+        }
+        .form-wrapper{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+
+    </style>
+</head>
+<body>
+    <h1 style="color: pink;">nejvetsi nqadpis</h1>
+    <h6 id="mini-nadpis">nejmensi nadpis</h6>
+    <span>span je inline</span>
+    <a href="https://www.google.com"></a>
+    <img src="" alt="">
+
+
+    <form action="vysledek.html" method="get">
+        <label for="name">Name:</label> <br>
+        <input type="text" id="name" name="name" placeholder="Your name" autofocus> <br>
+
+        <label for="grade">Class:</label> <br>
+        <input type="text" id="grade" name="grade"> <br>
+
+        <input type="checkbox" id="yes" name="yes" value="yes"><!--ctr mezernik napovi-->
+        <label for="yes"> I do have maturita</label><br>
+        <input type="checkbox" id="no" name="no" value="no">
+        <label for="no"> I do not have maturita</label><br>
+
+        <button type="submit">odevzdej</button>
+        <h3>Proč mám dostat maturitu</h3>
+    <div class="form-wrapper">
+        <ol>
+            <li>jsem nadšenec do techniky</li>
+            <li>Mit maturitu je super</li>
+            <li>nechchi se ucit o prazdninach</li>
+            <li>miluju jednicky a nuly</li>
+        </ol>
+    </div>
+
+        <article></article><!--existuji specialni div-->
+    <footer></footer>
+    <header></header>
+    <nav></nav>
+    </form>
+</body>
+</html>

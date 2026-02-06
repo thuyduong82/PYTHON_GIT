@@ -1,0 +1,52 @@
+/*flexbox zarovnava prvky defaultne do rady
+-html defaultne jde pod sebe display block nebo inline*/
+h1{
+    color: black;
+}
+.wrapper{
+    display: flex;
+    justify-content:center ;/*hlavni osa- kdyz je v row tak je hlavni osa x, kdyz v column tak hlavni osa je v y*/
+    align-items: center ;/*vedlejsi osa*/
+    flex-direction: column;
+    height: 100vh;
+}
+
+.wrapper h1 span{
+    color: red;
+}
+.wrapper ul li span{
+    color: blue;
+}
+
+.wrapper li:nth-child(2) span{
+    color: green;/*bez oznaceni napr h1<class<id<v html inline<important*/
+
+}
+
+.kolecko{
+    background-color: red;
+    border-radius: 50%;
+    height: 100px;
+    width: 100px;
+    position: absolute;
+    top: 200px;
+    right: 400px;
+}
+.btn{
+    margin: 80px;
+    background-color: purple;
+    font-size: 30px;
+    height: 70px;
+    width: 200px;
+    border-radius: 40px;
+
+}
+.btn:hover{
+    margin: 80px;
+    background-color: red;
+    font-size: 40px;
+    height: 70px;
+    width: 200px;
+    border-radius: 40px;
+    color: aliceblue;
+}
