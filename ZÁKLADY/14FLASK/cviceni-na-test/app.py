@@ -15,25 +15,21 @@ def manual():
 
 @app.route("/contact")
 def result():
+    if request.args:
+        entry = dict(request.args)
     name = request.args.get("jinja_name", default="____")
     message = request.args.get("jinja_message", default="____")
     
     if name and message:
-
         data = {
             "email": name,
             "message": message
         }
-     
-
-
-
-
+        with open("data.json", "r", encoding="utf-8") as f:
+            data = json.load(f)
+        data.append(entry)
         with open("data.json", "w", encoding="utf-8") as f:
             json.dump(data, f, ensure_ascii=False, indent=2)
-
-
-
     return render_template("contact.html", jinja_name=name, jinja_message=message)
 
 
