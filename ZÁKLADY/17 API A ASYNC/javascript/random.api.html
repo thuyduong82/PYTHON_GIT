@@ -3,11 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Dog API</title>
 </head>
 <body>
+
+    <img id="dogImg" src="" alt="dog" width="300">
+
     <script>
-        const api = "https://catfact.ninja/fact"
+        const api = "https://random.dog/woof.json"
 
         async function fetchData(api) {
             try {
@@ -25,8 +28,19 @@
         }
 
         async function showData() {  
+            const data = await fetchData(api)
+
+            if (data){
+                console.log(data)
+                console.log("funguje")
+
+                const img = document.getElementById("dogImg")
+                img.src = data.url
+            }
         }
 
+        showData()
     </script>
+
 </body>
 </html>
